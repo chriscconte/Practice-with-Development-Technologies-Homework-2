@@ -1,7 +1,8 @@
 from django.conf.urls import url
 
-from hello.views import HomePageView
+from . import views 
 
 urlpatterns = [
-    url(r'^$', HomePageView.as_view(), name='home'),
+    url(r'^$', views.index, name='home'),
+    url(r'^(?P<person_id>[0-9]+)/$', views.detail, name='detail'),
 ]

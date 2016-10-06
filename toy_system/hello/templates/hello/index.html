@@ -1,0 +1,13 @@
+<h1>
+  Welcome to TeamASEOne Wiki
+</h1>
+
+<p> 
+  Below is a list of members, click on them to find out more
+</p>
+
+<ul>
+{% for person in team_members%}
+		<li><a href="/{{ person.id }}/">{{ person.person_name }}</a></li>
+{% endfor %}
+</ul>
