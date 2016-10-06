@@ -1,0 +1,6 @@
+
+tterns = patterns(
+    '',
+
+        url(r'', include('hello.urls')),
+        )
