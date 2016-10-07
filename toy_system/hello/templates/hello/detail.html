@@ -1,5 +1,26 @@
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
 <h1> {{ person.person_name }} </h1>
 
-<p> <b> Bio: </b> {{ person.person_bio }} <p>
+<p> 
+  <b> Bio: </b> 
+  <button> Edit </button>
+</p>
 
-<button> Edit </button>
+<p id="noEdit"> {{ person.person_bio }} </p>
+
+<form action="{% url 'edit' person.id %}" method="post">
+  {% csrf_token %}
+  <input type='text' name='name' id='name' value='{{ person.person_name }}'/>
+  <textarea 
+     id="bio"
+     name='bio'
+     type="text" 
+     cols="50" 
+     rows="10" 
+     placeholder="{{person.person_bio}}" >
+    {{ person.person_bio }}
+  </textarea>
+
+  <input type="submit" value="Save"/>
+</form>
