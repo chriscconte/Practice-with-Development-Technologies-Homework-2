@@ -3,24 +3,49 @@
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <h1> {{ person.person_name }} </h1>
-<p> 
-  <b> Bio: </b> 
-</p>
+<div> 
+  <b> Bio: </b>
+</div>
+<div>
+  {{ person.person_bio }}
+</div>
 
-<p id="noEdit"> {{ person.person_bio }} </p>
+<script>
 
-<form action="{% url 'edit' person.id %}" method="post">
+function showEdit () {
+
+    var chboxs = document.getElementById("c1");
+    if(chboxs.checked){
+       vis = "block";
+    } else {
+       vis = "none";
+    }
+    document.getElementById('editForm').style.display = vis;
+
+}
+</script>
+
+<div></div>
+<label> Edit </label>
+<input type="checkbox" id="c1" onclick="showEdit()">
+
+<form id='editForm' style="display: none" action="{% url 'edit' person.id %}" method="post">
   {% csrf_token %}
-  <input type='text' name='name' id='name' value='{{ person.person_name }}'/>
-  <textarea 
-     id="bio"
-     name='bio'
-     type="text" 
-     cols="50" 
-     rows="10" 
-     placeholder="{{person.person_bio}}" >
-    {{ person.person_bio }}
-  </textarea>
+  <div>
+    <input type='text' name='name' id='name' value='{{ person.person_name }}'/>
+  </div>
+  <div>
+    <textarea 
+       id="bio"
+			 name='bio'
+		   type="text" 
+			 cols="50" 
+			 rows="10" 
+			 placeholder="{{person.person_bio}}" >
+      {{ person.person_bio }}
+    </textarea>
+  </div>
+  
 
   <input type="submit" value="Save"/>
 </form>

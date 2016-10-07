@@ -23,21 +23,11 @@ def index(request):
 
 def edit(request, person_id):
     person = get_object_or_404(Person, pk=person_id)
-    print (request.POST) 
-    try:
-        name = request.POST['name']
-        bio = request.POST['bio'] 
-    except (KeyError, person.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(request, 'hello/detail.html', {
-            'person': person,
-            'error-message': 'oops something went wrong',
-        })
-    else:
-        person.person_name = name
-        person.person_bio = bio
-        person.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('detail', args=(person.id,)))
+    
+    person.person_name = request.POST['name']
+    person.person_bio = request.POST['bio']
+    person.save()
+    # Always return an HttpResponseRedirect after successfully dealing
+    # with POST data. This prevents data from being posted twice if a
+    # user hits the Back button.
+    return HttpResponseRedirect(reverse('detail', args=(person.id,)))
