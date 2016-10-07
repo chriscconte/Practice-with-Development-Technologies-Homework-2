@@ -23,9 +23,10 @@ def index(request):
 
 def edit(request, person_id):
     person = get_object_or_404(Person, pk=person_id)
-    print person.person_name
+    
+    person.person_name = request.POST['name']
+    person.person_bio = request.POST['bio']
     person.save()
-    print person.person_name
     # Always return an HttpResponseRedirect after successfully dealing
     # with POST data. This prevents data from being posted twice if a
     # user hits the Back button.
