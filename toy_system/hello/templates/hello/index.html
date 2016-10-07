@@ -8,6 +8,13 @@
 
 <ul>
 {% for person in team_members%}
-		<li><a href="/hello/{{ person.id }}/">{{ person.person_name }}</a></li>
+		<li>
+      <a href="/hello/{{ person.id }}/">{{ person.person_name }}</a>
+      <button type="button">Remove</button> 
+    </li>
 {% endfor %}
 </ul>
+<a href="{% url 'detail' 2 %}" class='btn btn-info pull-right'> Add Member </a>
+
+<form action="{% url 'add' 2 %}" method="get"></form>
+<button type="button" onclick="{% url 'detail' 2 %}">Add Member</button> 
